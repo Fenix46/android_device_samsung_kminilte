@@ -19,10 +19,10 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/kminilte/kminilte-vendor.mk)
 
-LOCAL_PATH := device/samsung/kminilte
+DEVICE_FOLDER := device/samsung/kminilte
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += $(DEVICE_FOLDER)/overlay
 
 # Device uses high-density artwork where available
 #PRODUCT_AAPT_CONFIG := normal hdpi
@@ -50,8 +50,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/audio/tiny_hw.xml:system/etc/tiny_hw.xml
+    $(DEVICE_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    $(DEVICE_FOLDER)/audio/tiny_hw.xml:system/etc/tiny_hw.xml
 
 # Data workaround
 #PRODUCT_COPY_FILES += \
@@ -71,9 +71,8 @@ PRODUCT_PACKAGES += \
 
 # Media config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
+    $(DEVICE_FOLDER)/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(DEVICE_FOLDER)/media/media_profiles.xml:system/etc/media_profiles.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
@@ -84,7 +83,7 @@ PRODUCT_PACKAGES += \
 
 # Radio
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/sbin/cbd:root/sbin/cbd
+    $(DEVICE_FOLDER)/rootdir/sbin/cbd:root/sbin/cbd
 
 PRODUCT_PACKAGES += \
     libsecril-client   
@@ -104,8 +103,8 @@ PRODUCT_PACKAGES += \
 #    p2p_supplicant
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+    $(DEVICE_FOLDER)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(DEVICE_FOLDER)/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

@@ -57,7 +57,7 @@ TARGET_SPECIFIC_HEADER_PATH := device/samsung/kminilte/include
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := 
-TARGET_KERNEL_CONFIG := kminilte_00_defconfig
+TARGET_KERNEL_CONFIG := kminilte_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/g800f
 #TARGET_PREBUILT_KERNEL := device/samsung/kminilte/kernel
 
@@ -77,18 +77,6 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/kminilte/bluetooth
 # Graphics
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/kminilte/egl/egl.cfg
-
-# Pre-L Compatibility
-COMMON_GLOBAL_CFLAGS += \
-    -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL \
-    -DENABLE_NON_PIE_SUPPORT
-
-# Legacy MMAP for pre-lollipop blobs
-# (needed by mcDriverDaemon which in turn is needed by cbd)
-BOARD_USES_LEGACY_MMAP := true
-
-# Media
-COMMON_GLOBAL_CFLAGS += -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL # acquire_buffer symbol for libwvm.so
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
