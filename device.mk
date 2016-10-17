@@ -14,12 +14,9 @@
 # limitations under the License.
 #
 
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
-# Also get non-open-source specific aspects if available
-$(call inherit-product-if-exists, vendor/samsung/kminilte/kminilte-vendor.mk)
-
 DEVICE_FOLDER := device/samsung/kminilte
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_FOLDER)/overlay
@@ -85,8 +82,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/rootdir/sbin/cbd:root/sbin/cbd
 
-PRODUCT_PACKAGES += \
-    libsecril-client   
+#PRODUCT_PACKAGES += \
+#    libsecril-client   
     
 # Samsung
 PRODUCT_PACKAGES += \
@@ -142,3 +139,6 @@ PRODUCT_COPY_FILES += \
 # Dalvik VM specific for devices with 2048 MB of RAM (G800F has 1.5G, but 2G config seems to fit)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 #dalvik.vm.heapgrowthlimit=128m
+
+# Also get non-open-source specific aspects if available
+$(call inherit-product-if-exists, vendor/samsung/kminilte/kminilte-vendor.mk)

@@ -14,7 +14,10 @@
 # limitations under the License.
 #
 
-BOARD_VENDOR := samsung
+DEVICE_FOLDER := device/samsung/kminilte
+
+# inherit from HW Samsung
+-include hardware/samsung/slsi/exynos3470/Android.mk
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -34,9 +37,6 @@ TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a7
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-# Assert
-TARGET_OTA_ASSERT_DEVICE := kminilte
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := universal3470
 TARGET_NO_BOOTLOADER := true
@@ -51,7 +51,7 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 314572800
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Include path
-TARGET_SPECIFIC_HEADER_PATH := device/samsung/kminilte/include
+#TARGET_SPECIFIC_HEADER_PATH := device/samsung/kminilte/include
 
 # Kernel
 BOARD_KERNEL_BASE := 0x10000000
@@ -79,12 +79,12 @@ USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/kminilte/egl/egl.cfg
 
 # RIL
-BOARD_PROVIDES_LIBRIL := true
-BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
-BOARD_MODEM_TYPE := ss222
+#BOARD_PROVIDES_LIBRIL := true
+#BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
+#BOARD_MODEM_TYPE := ss222
 
 # Radio
-BOARD_RIL_CLASS := ../../../device/samsung/kminilte/ril
+#BOARD_RIL_CLASS := ../../../device/samsung/kminilte/ril
 
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
