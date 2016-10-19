@@ -22,9 +22,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_FOLDER)/overlay
 
 # Device uses high-density artwork where available
-#PRODUCT_AAPT_CONFIG := normal hdpi
-#PRODUCT_AAPT_PREF_CONFIG := hdpi
-
+PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1280
@@ -35,9 +34,8 @@ PRODUCT_PACKAGES += \
     fstab.universal3470 \
     init.universal3470.rc \
     init.universal3470.usb.rc \
+    init.wifi.rc \
     ueventd.universal3470.rc
-PRODUCT_PACKAGES += \
-    init.wifi.rc
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -50,21 +48,17 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(DEVICE_FOLDER)/audio/tiny_hw.xml:system/etc/tiny_hw.xml
 
-# Data workaround
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/configs/enable_data:system/bin/enable_data
-
 # HW composer (needed by libMali.so)
 PRODUCT_PACKAGES += \
     libion
 
-# Keylayouts
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
-
 # Lights
-#PRODUCT_PACKAGES += \
-#    lights.exynos3
+PRODUCT_PACKAGES += \
+    lights.exynos3
+
+# Power
+PRODUCT_PACKAGES += \
+    power.exynos3
 
 # Media config
 PRODUCT_COPY_FILES += \
@@ -83,7 +77,7 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/rootdir/sbin/cbd:root/sbin/cbd
 
 #PRODUCT_PACKAGES += \
-#    libsecril-client   
+    libsecril-client   
     
 # Samsung
 PRODUCT_PACKAGES += \
@@ -91,13 +85,7 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    wpa_supplicant \
-    wpa_supplicant.conf
-#    dhcpcd.conf \
-#    hostapd \
-#    hostapd_default.conf \
-#    libwpa_client \
-#    p2p_supplicant
+    wifiloader
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_FOLDER)/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
@@ -138,7 +126,6 @@ PRODUCT_COPY_FILES += \
 
 # Dalvik VM specific for devices with 2048 MB of RAM (G800F has 1.5G, but 2G config seems to fit)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-#dalvik.vm.heapgrowthlimit=128m
 
 # Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/kminilte/kminilte-vendor.mk)

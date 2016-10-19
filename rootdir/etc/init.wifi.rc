@@ -33,6 +33,12 @@ on post-fs-data
 on boot
 	setprop wifi.interface wlan0
 
+# Run deferred initcalls of builtin kernel modules (bcmdhd)
+service wifiloader /system/bin/wifiloader
+    class main
+    seclabel u:r:wifiloader:s0
+    oneshot
+
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf -O/data/misc/wifi/sockets -N \
@@ -93,6 +99,7 @@ service wlandutservice /system/bin/wlandutservice
 service macloader /system/bin/macloader
     class main
     oneshot
+    seclabel u:r:macloader:s0
 
 on property:init.svc.macloader=stopped
     chown system root /data/.cid.info
