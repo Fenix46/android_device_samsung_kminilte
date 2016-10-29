@@ -54,8 +54,6 @@ PRODUCT_PACKAGES += \
     tinyucm.conf \
     AriesParts \
     DockAudio
-
-#    audio.wrapper.universal3470 \
     
 # Bluetooth    
 PRODUCT_PACKAGES += \
@@ -101,7 +99,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     nfc_nci.universal3470
 
-# Powr
+# Power
 PRODUCT_PACKAGES += \
     power.default \
     power.universal3470
@@ -188,7 +186,7 @@ PRODUCT_PACKAGES += \
     ebtables \
     ethertypes
     
-# libstlport
+# Other requires modules
 PRODUCT_PACKAGES += \
     libstlport \
     libsecurepath
