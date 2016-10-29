@@ -40,49 +40,23 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/default_gain.conf:system/etc/default_gain.conf
 
-    
-
-camera.goldfish.jpeg.so                                                                                                                                       
-camera.goldfish.so                                                                                                                                            
-consumerir.default.so                                                                                                                                         
-gps.default.so                                                                                                                                                
-gps.goldfish.so                                                                                                                                               
-gralloc.default.so                                                                                                                                            
-gralloc.exynos3.so                                                                                                                                            
-hwcomposer.exynos3.so                                                                                                                                         
-keystore.default.so                                                                                                                                           
-keystore.exynos3470.so                                                                                                                                        
-lights.goldfish.so                                                                                                                                            
-local_time.default.so                                                                                                                                         
-memtrack.exynos3.so                                                                                                                                           
-nfc_nci.universal3470.so                                                                                                                                      
-power.default.so                                                                                                                                              
-power.exynos3.so                                                                                                                                              
-power.goldfish.so
-sensors.goldfish.so
-sensors.universal3470.so
-vibrator.default.so
-vibrator.goldfish.so    
-    
-    
-    
-
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio_policy.default \
     audio.primary.default \
     audio.primary.universal3470 \
-    audio.wrapper.universal3470 \
     audio.r_submix.default \
     audio.usb.default \
     sound_trigger.primary.universal3470 \
-    mixer_paths.xml \
     libsamsungRecord_zoom \
+    mixer_paths.xml \
     default_gain.conf \
     tinyucm.conf \
     AriesParts \
     DockAudio
 
+#    audio.wrapper.universal3470 \
+    
 # Bluetooth    
 PRODUCT_PACKAGES += \
     bluetooth.default
@@ -108,12 +82,7 @@ PRODUCT_PACKAGES += \
 
 # Gralloc
 PRODUCT_PACKAGES += \
-    gralloc.default \
-    gralloc.universal3470
-
-# HWComposer
-PRODUCT_PACKAGES += \
-    hwcomposer.universal3470 \
+    gralloc.default 
 
 # KeyStore
 PRODUCT_PACKAGES += \
@@ -127,10 +96,6 @@ PRODUCT_PACKAGES += \
 # Local Time
 PRODUCT_PACKAGES += \
     local_time.default
-
-# MemTrack
-PRODUCT_PACKAGES += \
-    memtrack.universal3470
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -270,14 +235,31 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
     
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.ril_class=Exynos3470RIL \
     qcom.bluetooth.soc=rome \
-    persist.sys.usb.config=mtp \
-    ro.arch=exynos3470 \
     debug.hwui.render_dirty_regions=false \
     ro.opengles.version=131072 \
-    ro.zygote.disable_gl_preload=true
-    
+    ro.zygote.disable_gl_preload=true \
+    ro.config.vc_call_vol_steps=6 \
+    persist.audio.dualmic.config=endfire \
+    ro.qc.sdk.audio.fluencetype=fluence \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicecomm=false \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=false \
+    net.tethering.noprovisioning=true \
+    persist.camera.cpp.duplication=false \
+    persist.data.iwlan.enable=true \
+    persist.radio.ignore_ims_wlan=1 \
+    persist.radio.data_con_rprt=1 \
+    ro.telephony.get_imsi_from_sim=true    
+
+# Telephony-ext
+PRODUCT_PACKAGES += \
+    telephony-ext ims-ext-common
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 #ADB
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \

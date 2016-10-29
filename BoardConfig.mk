@@ -54,8 +54,8 @@ TARGET_KERNEL_SOURCE := kernel/samsung/kminilte
 #TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(PWD)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
 
 # Platform
-TARGET_BOARD_PLATFORM := universal3470
-TARGET_SOC := universal3470
+TARGET_BOARD_PLATFORM := exynos3
+TARGET_SOC := exynos3470
 
 # Other
 BOARD_USES_BLOB_LESS := true
@@ -64,7 +64,7 @@ BOARD_USES_BLOB_LESS := true
 BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
 
 # Use stock HAL
-TARGET_EXYNOS3_AUDIO_FROM_SOURCE := false
+TARGET_EXYNOS3_AUDIO_FROM_SOURCE := true
 
 # Lollipop Audio HAL is incompatible with Android M (see http://review.cyanogenmod.org/#/c/121831/)
 TARGET_TINY_ALSA_IGNORE_SILENCE_SIZE := true
@@ -81,14 +81,14 @@ BOARD_GLOBAL_CFLAGS += -DCAMERA_VENDOR_L_COMPAT
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/kminilte/cmhw
 
-# DEX PreOptimization
-ifeq ($(HOST_OS),linux)
-  ifeq ($(TARGET_BUILD_VARIANT),userdebug)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
+# Disable dex-preoptimization
+WITH_DEXPREOPT := false
+
+# Disable dex-preoptimization of prebuilts to save space.
+DONT_DEXPREOPT_PREBUILTS := true
+
+# SoundTrigger
+BOARD_SUPPORTS_SOUND_TRIGGER := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
