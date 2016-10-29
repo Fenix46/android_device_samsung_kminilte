@@ -120,7 +120,6 @@ TARGET_PROVIDES_LIBSENSORS := true
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # SELinux
-TAGET_USES_OLD_SEPOLICY := true
 BOARD_SEPOLICY_DIRS := device/samsung/kminilte/sepolicy
 	
 # Vendor Init

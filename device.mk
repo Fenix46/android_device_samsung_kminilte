@@ -37,7 +37,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/default_gain.conf:system/etc/default_gain.conf
 
 PRODUCT_PACKAGES += \
     audio_policy.default \
@@ -72,7 +73,7 @@ PRODUCT_PACKAGES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     fingerprintd \
-    fingerprint.default \
+    fingerprint.universal3470 \
     ValidityService
     
 # GPS
@@ -140,6 +141,9 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.universal3470
+    
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/alp_cal.dat:system/etc/alp_cal.dat
 
 # Samsung
 PRODUCT_PACKAGES += \
