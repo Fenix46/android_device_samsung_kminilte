@@ -40,17 +40,43 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/default_gain.conf:system/etc/default_gain.conf
 
+    
+
+camera.goldfish.jpeg.so                                                                                                                                       
+camera.goldfish.so                                                                                                                                            
+consumerir.default.so                                                                                                                                         
+gps.default.so                                                                                                                                                
+gps.goldfish.so                                                                                                                                               
+gralloc.default.so                                                                                                                                            
+gralloc.exynos3.so                                                                                                                                            
+hwcomposer.exynos3.so                                                                                                                                         
+keystore.default.so                                                                                                                                           
+keystore.exynos3470.so                                                                                                                                        
+lights.goldfish.so                                                                                                                                            
+local_time.default.so                                                                                                                                         
+memtrack.exynos3.so                                                                                                                                           
+nfc_nci.universal3470.so                                                                                                                                      
+power.default.so                                                                                                                                              
+power.exynos3.so                                                                                                                                              
+power.goldfish.so
+sensors.goldfish.so
+sensors.universal3470.so
+vibrator.default.so
+vibrator.goldfish.so    
+    
+    
+    
+
 PRODUCT_PACKAGES += \
-    audio_policy.default \
     audio.a2dp.default \
+    audio_policy.default \
     audio.primary.default \
-    audio.wrapper.universal3470 \
     audio.primary.universal3470 \
+    audio.wrapper.universal3470 \
     audio.r_submix.default \
     audio.usb.default \
     sound_trigger.primary.universal3470 \
     mixer_paths.xml \
-    audio.vendor.universal3470 \
     libsamsungRecord_zoom \
     default_gain.conf \
     tinyucm.conf \
@@ -60,7 +86,7 @@ PRODUCT_PACKAGES += \
 # Bluetooth    
 PRODUCT_PACKAGES += \
     bluetooth.default
-    
+
 # Camera
 PRODUCT_PACKAGES += \
     camera.universal3470 \
@@ -69,7 +95,7 @@ PRODUCT_PACKAGES += \
 # Consumer IR
 PRODUCT_PACKAGES += \
     consumerir.default
-
+    
 # Fingerprint
 PRODUCT_PACKAGES += \
     fingerprintd \
@@ -79,11 +105,52 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     gps.default
-    
+
 # Gralloc
 PRODUCT_PACKAGES += \
     gralloc.default \
     gralloc.universal3470
+
+# HWComposer
+PRODUCT_PACKAGES += \
+    hwcomposer.universal3470 \
+
+# KeyStore
+PRODUCT_PACKAGES += \
+    keystore.default \
+    keystore.exynos3470 
+
+# Lights    
+PRODUCT_PACKAGES += \
+    lights.universal3470                                                                                                                                            
+
+# Local Time
+PRODUCT_PACKAGES += \
+    local_time.default
+
+# MemTrack
+PRODUCT_PACKAGES += \
+    memtrack.universal3470
+
+# NFC
+PRODUCT_PACKAGES += \
+    nfc_nci.universal3470
+
+# Powr
+PRODUCT_PACKAGES += \
+    power.default \
+    power.universal3470
+
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.universal3470
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/alp_cal.dat:system/etc/alp_cal.dat
+    
+# Vibrator
+PRODUCT_PACKAGES += \
+    vibrator.default
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -100,16 +167,12 @@ PRODUCT_PACKAGES += \
     
 # Multimedia
 PRODUCT_PACKAGES += \
-    libExynosOMX_Core.so \
-    libOMX.Exynos.AVC.Decoder.so \
-    libOMX.Exynos.AVC.Encoder.so \
-    libOMX.Exynos.MPEG4.Decoder.so \
-    libOMX.Exynos.MPEG4.Encoder.so \
-    libOMX.Exynos.WMV.Decoder.so \
-    
-# Lights
-PRODUCT_PACKAGES += \
-    lights.universal3470
+    libExynosOMX_Core \
+    libOMX.Exynos.AVC.Decoder \
+    libOMX.Exynos.AVC.Encoder \
+    libOMX.Exynos.MPEG4.Decoder \
+    libOMX.Exynos.MPEG4.Encoder \
+    libOMX.Exynos.WMV.Decoder \
     
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -122,9 +185,10 @@ PRODUCT_PACKAGES += \
     libnfc-nci \
     Tag
 
-# Power
-PRODUCT_PACKAGES += \
-    power.universal3470
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
+    $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
     
 # Ramdisk
 PRODUCT_PACKAGES += \
@@ -138,21 +202,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libsecril-client    
     
-# Sensors
-PRODUCT_PACKAGES += \
-    sensors.universal3470
-    
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/alp_cal.dat:system/etc/alp_cal.dat
-
 # Samsung
 PRODUCT_PACKAGES += \
     SamsungServiceMode
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/nfc/libnfc-sec.conf:system/etc/libnfc-brcm.conf \
-    $(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
-    $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
 
 # Radio
 PRODUCT_COPY_FILES += \
