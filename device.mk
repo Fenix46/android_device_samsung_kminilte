@@ -30,6 +30,12 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
+#ADB
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.adb.secure=0 \
+    ro.secure=0 \
+    ro.debuggable=1      
+
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
@@ -38,22 +44,21 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/default_gain.conf:system/etc/default_gain.conf
-
-PRODUCT_PACKAGES += \
+    
+# Audio
+PRODUCT_PACKAGES := \
     audio.a2dp.default \
-    audio_policy.default \
-    audio.primary.default \
     audio.primary.universal3470 \
     audio.r_submix.default \
     audio.usb.default \
     sound_trigger.primary.universal3470 \
-    libsamsungRecord_zoom \
     mixer_paths.xml \
+    audio.vendor.universal3470 \
+    libsamsungRecord_zoom \
     default_gain.conf \
     tinyucm.conf \
     AriesParts \
-    DockAudio
+    DockAudio    
     
 # Bluetooth    
 PRODUCT_PACKAGES += \
@@ -80,12 +85,12 @@ PRODUCT_PACKAGES += \
 
 # Gralloc
 PRODUCT_PACKAGES += \
-    gralloc.default 
-
-# KeyStore
+    gralloc.default \
+    gralloc.universal3470
+    
+# HWComposer
 PRODUCT_PACKAGES += \
-    keystore.default \
-    keystore.exynos3470 
+    hwcomposer.universal3470    
 
 # Lights    
 PRODUCT_PACKAGES += \
@@ -95,47 +100,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     local_time.default
 
-# NFC
-PRODUCT_PACKAGES += \
-    nfc_nci.universal3470
-
 # Power
 PRODUCT_PACKAGES += \
     power.default \
     power.universal3470
-
-# Sensors
-PRODUCT_PACKAGES += \
-    sensors.universal3470
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/alp_cal.dat:system/etc/alp_cal.dat
-    
-# Vibrator
-PRODUCT_PACKAGES += \
-    vibrator.default
-
-# Graphics
-PRODUCT_PACKAGES += \
-    libion \
-    libion_exynos \
-    libcsc \
-    libexynosutils \
-    libgscaler \
-    libhwc \
-    libhwjpeg \
-    libstagefrighthw \
-    libswconverter \
-    libexynosv4l2
-    
-# Multimedia
-PRODUCT_PACKAGES += \
-    libExynosOMX_Core \
-    libOMX.Exynos.AVC.Decoder \
-    libOMX.Exynos.AVC.Encoder \
-    libOMX.Exynos.MPEG4.Decoder \
-    libOMX.Exynos.MPEG4.Encoder \
-    libOMX.Exynos.WMV.Decoder \
     
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -153,6 +121,50 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/nfc/libnfc-sec-hal.conf:system/etc/libnfc-sec-hal.conf \
     $(LOCAL_PATH)/nfc/nfcee_access.xml:system/etc/nfcee_access.xml
     
+# Power
+PRODUCT_PACKAGES += \
+    power.universal3470
+
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.universal3470
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/alp_cal.dat:system/etc/alp_cal.dat
+    
+# Vibrator
+PRODUCT_PACKAGES += \
+    vibrator.default
+
+# Blobless libraries
+PRODUCT_PACKAGES += \
+    libcamera2 \
+    libcsc \
+    libexynosutils \
+    libgscaler \
+    libhwjpeg \
+    libion_exynos \
+    libkeymaster \
+    libsecurepath \
+    libstagefrighthw \
+    libswconverter \
+    libv4l2
+    
+# Multimedia
+PRODUCT_PACKAGES += \
+    libExynosOMX_Core \
+    libOMX.Exynos.AVC.Decoder \
+    libOMX.Exynos.AVC.Encoder \
+    libOMX.Exynos.MP3.Decoder \
+    libOMX.Exynos.MPEG4.Decoder \
+    libOMX.Exynos.MPEG4.Encoder \
+    libOMX.Exynos.WMV.Decoder \
+
+# Support libraries
+PRODUCT_PACKAGES += \
+    libion \
+    libstlport
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     fstab.universal3470 \
@@ -181,26 +193,33 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     wifiloader \
-    hostapd \
-    wpa_supplicant \
     ebtables \
-    ethertypes
+    ethertypes \
+    hostapd \
+    wpa_supplicant    
     
 # Other requires modules
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     libstlport \
     libsecurepath
 
 # MobiCore
 PRODUCT_PACKAGES += \
     libMcClient \
-    mcDriverDaemon \
-    macloader
+    libMcRegistry \
+    mcDriverDaemon
     
 # USB Accesory
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
-    
+
+# Telephony-ext
+PRODUCT_PACKAGES += \
+    telephony-ext ims-ext-common
+
+PRODUCT_BOOT_JARS += \
+    telephony-ext
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
@@ -233,10 +252,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
     
 PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.bluetooth.soc=rome \
-    debug.hwui.render_dirty_regions=false \
-    ro.opengles.version=131072 \
-    ro.zygote.disable_gl_preload=true \
     ro.config.vc_call_vol_steps=6 \
     persist.audio.dualmic.config=endfire \
     ro.qc.sdk.audio.fluencetype=fluence \
@@ -249,20 +264,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.iwlan.enable=true \
     persist.radio.ignore_ims_wlan=1 \
     persist.radio.data_con_rprt=1 \
-    ro.telephony.get_imsi_from_sim=true    
-
-# Telephony-ext
-PRODUCT_PACKAGES += \
-    telephony-ext ims-ext-common
-
-PRODUCT_BOOT_JARS += \
-    telephony-ext
-
-#ADB
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    ro.secure=0 \
-    ro.debuggable=1    
+    ro.telephony.get_imsi_from_sim=true \
+    ro.telephony.ril_class=Exynos3470RIL \
+    qcom.bluetooth.soc=rome \
+    persist.sys.usb.config=mtp \
+    ro.arch=exynos3470 \
+    debug.hwui.render_dirty_regions=false \
+    ro.opengles.version=131072 \
+    ro.zygote.disable_gl_preload=true
 
 # Dalvik VM specific for devices with 2048 MB of RAM (G800F has 1.5G, but 2G config seems to fit)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)

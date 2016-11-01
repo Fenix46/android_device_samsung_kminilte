@@ -72,7 +72,7 @@ BOARD_USES_BLOB_LESS := true
 BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
 
 # Use stock HAL
-TARGET_EXYNOS3_AUDIO_FROM_SOURCE := true
+TARGET_EXYNOS3_AUDIO_FROM_SOURCE := false
 
 # Lollipop Audio HAL is incompatible with Android M (see http://review.cyanogenmod.org/#/c/121831/)
 TARGET_TINY_ALSA_IGNORE_SILENCE_SIZE := true
@@ -113,7 +113,7 @@ BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_HAL_SUFFIX := universal3470
 
 # PowerHAL
-TARGET_POWERHAL_VARIANT := universal3470
+TARGET_POWERHAL_VARIANT := exynos3
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
